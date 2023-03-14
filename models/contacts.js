@@ -50,9 +50,10 @@ const removeContact = async (contactId) => {
     if (idx === -1) {
       return null;
     }
-    const [deleteContact] = contacts.splice(idx, 1);
-    await updateContact(contacts);
-    return deleteContact;
+    const filtredContact = contacts.filter((_, index) => index !== idx);
+    await fs.writeFile(contactsPath, JSON.stringify(filtredContact));
+
+    return contacts[idx];
   } catch (error) {
     console.log(error.message);
   }
