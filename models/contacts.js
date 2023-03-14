@@ -27,6 +27,7 @@ const getContactById = async (contactId) => {
     console.log(error.message);
   }
 };
+
 const updateContact = async (contactId, body) => {
   const { name, email, phone } = body;
   try {
