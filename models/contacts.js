@@ -29,14 +29,13 @@ const getContactById = async (contactId) => {
 };
 
 const updateContact = async (contactId, body) => {
-  const { name, email, phone } = body;
   try {
     const contacts = await listContacts();
     const idx = contacts.findIndex((item) => item.id === contactId);
     if (idx === -1) {
       return null;
     }
-    contacts[idx] = { contactId, name, email, phone };
+    contacts[idx] = { contactId, ...body };
     await fs.writeFile(contactsPath, JSON.stringify(contacts));
     return contacts[idx];
   } catch (error) {
