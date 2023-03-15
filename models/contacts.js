@@ -61,13 +61,13 @@ const removeContact = async (contactId) => {
 };
 
 const addContact = async (body) => {
-  const { name, email, phone } = body;
+  // const { name, email, phone } = body;
   try {
     const contacts = await listContacts();
 
-    const newContact = [...contacts, { id: v4(), name, email, phone }];
-
-    await fs.writeFile(contactsPath, JSON.stringify(newContact), "utf-8");
+    const newContact = { id: v4(), ...body };
+    contacts.push(newContact);
+    await fs.writeFile(contactsPath, JSON.stringify(contacts), "utf-8");
 
     return newContact;
   } catch (error) {
