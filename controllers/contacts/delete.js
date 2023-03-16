@@ -10,7 +10,7 @@ const deleteContact = async (req, res, next) => {
       error.status = 404;
       throw error;
     }
-    res.json({
+    res.status(200).json({
       message: "contact deleted",
     });
   } catch (error) {

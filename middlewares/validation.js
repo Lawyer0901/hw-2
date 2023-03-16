@@ -5,6 +5,10 @@ const validation = (schema) => {
       error.status = 400;
       next(error);
     }
+    if (!Object.keys(req.body).length) {
+      res.status(400).json({ message: "missing fields" });
+      return;
+    }
     next();
   };
 };
