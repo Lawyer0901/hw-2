@@ -13,4 +13,16 @@ const validation = (schema) => {
   };
 };
 
+const favoriteValidation = (schema) => {
+  return (req, res, next) => {
+    const { favorite } = req.body;
+    if (!favorite) {
+      res.status(400).json({ message: "missing fields favorite" });
+      return;
+    }
+    next();
+  };
+};
+
 module.exports = validation;
+module.exports = favoriteValidation;

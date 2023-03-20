@@ -34,6 +34,10 @@ const joiSchema = Joi.object({
   favorite: Joi.bool(),
 });
 
+const favoriteSchema = Joi.object({
+  favorite: Joi.bool().required(),
+});
+
 const Contact = model("contact", contactSchema);
 
-module.exports = { Contact, joiSchema };
+module.exports = { Contact, joiSchema, favoriteSchema };
