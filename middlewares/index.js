@@ -1,7 +1,9 @@
-const validation = require("./validation");
-const favoriteValidation = require("./validation");
+const validationAddContact = require("./validation");
+const validationUpdContact = require("./validation");
+const validationUpdStatusContact = require("./validation");
 
 module.exports = {
-  validation,
-  favoriteValidation,
+  validationAddContact,
+  validationUpdContact,
+  validationUpdStatusContact,
 };
