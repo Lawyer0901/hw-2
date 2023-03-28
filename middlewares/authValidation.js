@@ -1,6 +1,7 @@
 const Joi = require("joi");
 const jwt = require("jsonwebtoken");
 const { User } = require("../models");
+const { SECRET_KEY } = process.env;
 
 const userValidation = (req, res, next) => {
   const schema = Joi.object({
@@ -25,12 +26,10 @@ const userTokenValidation = async (req, res, next) => {
   let userDetails;
 
   try {
-    userDetails = jwt.verify(token, process.env.JWT_SECRET);
+    userDetails = jwt.verify(token, SECRET_KEY);
   } catch (err) {
     res.status("401").json({ message: "Not authorized" });
-    return;
   }
-
   const user = await User.findById(userDetails.id);
 
   if (!user) {
