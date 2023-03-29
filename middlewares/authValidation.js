@@ -21,25 +21,46 @@ const userValidation = (req, res, next) => {
 };
 
 const userTokenValidation = async (req, res, next) => {
-  const token = req.headers.authorization.split(" ")[1];
-
-  let userDetails;
+  const { authorization = "" } = req.headers;
+  const [bearer, token] = authorization.split(" ");
 
   try {
-    userDetails = jwt.verify(token, SECRET_KEY);
-  } catch (err) {
-    res.status("401").json({ message: "Not authorized" });
+    if (bearer !== "Bearer") {
+      res.status(401).json({ message: "Not authorized" });
+    }
+    const { id } = jwt.verify(token, SECRET_KEY);
+    const user = await User.findById(id);
+    if (!user) {
+      res.status(401).json({ message: "Not authorized" });
+    }
+    req.user = user;
+    next();
+  } catch (error) {
+    if (error.message === "Invalid signature") {
+      error.status = 401;
+    }
+    next(error);
   }
-  const user = await User.findById(userDetails.id);
 
-  if (!user) {
-    res.status("401").json({ message: "Not authorized" });
-    return;
-  }
+  // const token = req.headers.authorization.split(" ")[1];
 
-  req.user = user;
+  // let userDetails;
 
-  next();
+  // try {
+  //   userDetails = jwt.verify(token, SECRET_KEY);
+  // } catch (err) {
+  //   res.status("401").json({ message: "Not authorized" });
+  // }
+  // const user = await User.findById(userDetails.id);
+
+  // if (!user) {
+  //   res.status("401").json({ message: "Not authorized" });
+  //   return;
+  // }
+
+  // req.user = user;
+
+  // next();
 };
 
 module.exports = { userValidation, userTokenValidation };

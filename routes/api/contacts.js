@@ -7,6 +7,7 @@ const {
   validationUpdContact,
   validationUpdStatusContact,
 } = require("../../middlewares/validation");
+const { userTokenValidation } = require("../../middlewares/authValidation");
 // const { favoriteValidation } = require("../../middlewares");
 // const { joiSchema, favoriteSchema } = require("../../models/contact");
 const { contacts: ctrl } = require("../../controllers");
@@ -15,11 +16,11 @@ const { contacts: ctrl } = require("../../controllers");
 
 // const validateMiddlewareFavorite = favoriteValidation(favoriteSchema);
 
-router.get("/", ctrl.getAll);
+router.get("/", userTokenValidation, ctrl.getAll);
 
 router.get("/:contactId", ctrl.getById);
 
-router.post("/", validationAddContact, ctrl.add);
+router.post("/", userTokenValidation, validationAddContact, ctrl.add);
 
 router.delete("/:contactId", ctrl.deleteContact);
 
