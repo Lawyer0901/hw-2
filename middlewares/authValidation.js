@@ -42,25 +42,11 @@ const userTokenValidation = async (req, res, next) => {
     next(error);
   }
 
-  // const token = req.headers.authorization.split(" ")[1];
-
-  // let userDetails;
-
-  // try {
-  //   userDetails = jwt.verify(token, SECRET_KEY);
-  // } catch (err) {
-  //   res.status("401").json({ message: "Not authorized" });
-  // }
-  // const user = await User.findById(userDetails.id);
-
-  // if (!user) {
-  //   res.status("401").json({ message: "Not authorized" });
-  //   return;
-  // }
-
-  // req.user = user;
-
-  // next();
 };
 
-module.exports = { userValidation, userTokenValidation };
+
+
+
+
+
+module.exports = { userValidation, userTokenValidation,  };
