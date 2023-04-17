@@ -23,8 +23,15 @@ const userSchema = Schema(
     avatarURL: {
       type: String,
     },
+    verify: {
+      type: Boolean,
+      default: false,
+    },
+    verificationToken: {
+      type: String,
+    },
   },
-  { versionKey: false, timestamps: true }
+  { versionKey: false }
 );
 
 const User = model("user", userSchema);
