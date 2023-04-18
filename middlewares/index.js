@@ -2,7 +2,11 @@ const validationAddContact = require("./validation");
 const validationUpdContact = require("./validation");
 const validationUpdStatusContact = require("./validation");
 
-const { userValidation, userTokenValidation } = require("./authValidation.js");
+const {
+  userValidation,
+  userTokenValidation,
+  userVerificationValidation,
+} = require("./authValidation.js");
 
 module.exports = {
   validationAddContact,
@@ -10,4 +14,5 @@ module.exports = {
   validationUpdStatusContact,
   userValidation,
   userTokenValidation,
+  userVerificationValidation,
 };
